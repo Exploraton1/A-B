@@ -6,10 +6,10 @@ const app = express();
 app.use(bodyParser.json());
 
 // === Ustawienia ===
-const telegramToken = 'TWÓJ_TELEGRAM_BOT_TOKEN';
-const chatId = 'TWÓJ_CHAT_ID';
+const telegramToken = '8172077960:AAGbuWwa_GaxMwFVnyoYR5zwKVAnDOta6K4'; // <-- Twój Token
+const chatId = '520819535'; // <-- Twój Chat ID
 
-// === Funkcja wysyłająca wiadomość przez Telegram ===
+// === Funkcja wysyłająca wiadomość do Telegram ===
 async function sendTelegramMessage(signal, price, sl, tp) {
   const message = `📈 Strategia A+B: ${signal.toUpperCase()}\nCena: ${price}\nStop Loss: ${sl}\nTake Profit: ${tp}`;
   const url = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
@@ -38,15 +38,15 @@ app.post('/webhook', async (req, res) => {
     // Wysyłka wiadomości do Telegram
     await sendTelegramMessage(data.signal, data.price, data.stopLoss, data.takeProfit);
 
-    return res.status(200).send('OK');
+    return res.status(200).json({ message: 'OK' });
   } catch (error) {
     console.error("❌ Błąd podczas przetwarzania webhooka:", error);
-    return res.status(500).send('Wewnętrzny błąd serwera');
+    return res.status(500).json({ error: 'Wewnętrzny błąd serwera' });
   }
 });
 
 // === Uruchomienie serwera ===
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Bot działa na porcie ${PORT}`);
+  console.log(`🚀 Webhook działa na porcie ${PORT}`);
 });
