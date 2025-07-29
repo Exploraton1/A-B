@@ -6,8 +6,8 @@ const app = express();
 app.use(bodyParser.json());
 
 // === Ustawienia ===
-const telegramToken = '8172077960:AAGbuWwa_GaxMwFVnyoYR5zwKVAnDOta6K4'; 
-const chatId = '-1002593483655'; 
+const telegramToken = '8172077960:AAGbuWwa_GaxMwFVnyoYR5zwKVAnDOta6K4';
+const chatId = '-1002593483655';
 
 // === Funkcja wysyłająca wiadomość do Telegram ===
 async function sendTelegramMessage(signal, price, sl, tp) {
